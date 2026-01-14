@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="56" fill="#1e40af" />
+
+  <!-- Shield shape -->
+  <path d="M60 18 L95 35 L95 65 Q95 90 60 105 Q25 90 25 65 L25 35 Z"
+        fill="#3b82f6" stroke="#60a5fa" stroke-width="2"/>
+
+  <!-- Checkmark/score indicator -->
+  <path d="M40 60 L55 75 L82 45"
+        fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Score bar at bottom -->
+  <rect x="35" y="82" width="50" height="6" rx="3" fill="#1e3a8a"/>
+  <rect x="35" y="82" width="35" height="6" rx="3" fill="#22c55e"/>
+
+  <!-- Small dots representing peer analysis -->
+  <circle cx="42" cy="42" r="3" fill="#ffffff" opacity="0.7"/>
+  <circle cx="52" cy="38" r="2" fill="#ffffff" opacity="0.5"/>
+  <circle cx="78" cy="42" r="3" fill="#ffffff" opacity="0.7"/>
+  <circle cx="68" cy="38" r="2" fill="#ffffff" opacity="0.5"/>
+</svg>

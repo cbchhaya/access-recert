@@ -1,0 +1,29 @@
+# Requirements for synthetic data generation
+# Note: Most dependencies are Python standard library
+
+# No external dependencies required for generate_synthetic_data.py
+# The script uses only:
+# - argparse (stdlib)
+# - dataclasses (stdlib)
+# - datetime (stdlib)
+# - hashlib (stdlib)
+# - json (stdlib)
+# - logging (stdlib)
+# - math (stdlib)
+# - os (stdlib)
+# - pathlib (stdlib)
+# - random (stdlib)
+# - sqlite3 (stdlib)
+# - typing (stdlib)
+# - uuid (stdlib)
+
+# For the full ARAS application, these will be needed:
+# fastapi>=0.104.0
+# uvicorn>=0.24.0
+# pydantic>=2.5.0
+# pandas>=2.1.0
+# numpy>=1.26.0
+# scikit-learn>=1.3.0
+# networkx>=3.2.0
+# anthropic>=0.7.0  # For Claude API
+# python-dotenv>=1.0.0
