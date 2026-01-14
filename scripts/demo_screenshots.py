@@ -90,15 +90,16 @@ async def demo_create_campaign(page: Page):
             await asyncio.sleep(0.2)
 
 
-async def wait_for_table_data(page: Page, timeout: int = 15000):
+async def wait_for_table_data(page: Page, timeout: int = 20000):
     """Wait for table to have actual data rows (not skeleton loaders)."""
     try:
-        # Wait for either real data rows or "No review items found" message
+        # Wait for either checkboxes (real data) or "No review items found" message
+        # Checkboxes only appear in actual data rows, not skeleton loaders
         await page.wait_for_selector(
-            "table tbody tr:not(:has(.animate-pulse)), table tbody tr:has(td[colspan])",
+            "table tbody tr input[type='checkbox'], table tbody td:has-text('No review items')",
             timeout=timeout
         )
-        await asyncio.sleep(0.3)  # Small buffer for rendering
+        await asyncio.sleep(0.5)  # Buffer for full render
     except:
         print("    [WARN] Table data may not have loaded completely")
 
