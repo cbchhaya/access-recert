@@ -90,6 +90,19 @@ async def demo_create_campaign(page: Page):
             await asyncio.sleep(0.2)
 
 
+async def wait_for_table_data(page: Page, timeout: int = 15000):
+    """Wait for table to have actual data rows (not skeleton loaders)."""
+    try:
+        # Wait for either real data rows or "No review items found" message
+        await page.wait_for_selector(
+            "table tbody tr:not(:has(.animate-pulse)), table tbody tr:has(td[colspan])",
+            timeout=timeout
+        )
+        await asyncio.sleep(0.3)  # Small buffer for rendering
+    except:
+        print("    [WARN] Table data may not have loaded completely")
+
+
 async def demo_campaign_detail(page: Page) -> str:
     """Capture campaign detail and review items. Returns campaign ID."""
     print("\n4. Campaign Detail & Review Items")
@@ -104,6 +117,9 @@ async def demo_campaign_detail(page: Page) -> str:
         await active_campaign.click()
         await wait_for_load(page)
 
+        # Wait for table data to actually load
+        await wait_for_table_data(page)
+
         # Get campaign ID from URL
         campaign_id = page.url.split("/campaigns/")[-1].split("?")[0]
 
@@ -114,12 +130,14 @@ async def demo_campaign_detail(page: Page) -> str:
         if await status_filter.count() > 0:
             await status_filter.select_option("Auto-Approved")
             await wait_for_load(page)
+            await wait_for_table_data(page)
             await screenshot(page, "04b_auto_approved_filter", "Review items filtered by Auto-Approved")
 
         # Filter by Needs-Review
         if await status_filter.count() > 0:
             await status_filter.select_option("Needs-Review")
             await wait_for_load(page)
+            await wait_for_table_data(page)
             await screenshot(page, "04c_needs_review_filter", "Review items filtered by Needs-Review")
 
         # Reset filter
@@ -163,9 +181,10 @@ async def demo_auto_approved_item(page: Page):
         if await status_filter.count() > 0:
             await status_filter.select_option("Auto-Approved")
             await wait_for_load(page)
+            await wait_for_table_data(page)
 
-            # Click on first auto-approved item row in the table
-            item_row = page.locator("table tbody tr").first
+            # Click on first auto-approved item row in the table (not skeleton)
+            item_row = page.locator("table tbody tr:not(:has(.animate-pulse))").first
             if await item_row.count() > 0:
                 await item_row.click()
                 await wait_for_load(page)
@@ -216,9 +235,10 @@ async def demo_needs_review_item(page: Page) -> str:
         if await status_filter.count() > 0:
             await status_filter.select_option("Needs-Review")
             await wait_for_load(page)
+            await wait_for_table_data(page)
 
-            # Click on first needs-review item row in the table
-            item_row = page.locator("table tbody tr").first
+            # Click on first needs-review item row in the table (not skeleton)
+            item_row = page.locator("table tbody tr:not(:has(.animate-pulse))").first
             if await item_row.count() > 0:
                 await item_row.click()
                 await wait_for_load(page)

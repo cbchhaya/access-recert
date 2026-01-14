@@ -1114,5 +1114,5 @@ A: The cost is computational cycles. The benefit is catching cases where peer gr
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 0.1.0 | 2025-01-14 | Full demo implementation with UI, analytics, chat |
-| 0.1 | 2025-01-13 | Initial design document |
+| 0.1.0 | 2026-01-14 | Full demo implementation with UI, analytics, chat |
+| 0.1 | 2026-01-13 | Initial design document |
